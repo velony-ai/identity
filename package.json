@@ -17,7 +17,13 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "flyway:migrate": "dotenv -e .env -- flyway -configFiles=flyway.conf migrate",
+    "flyway:info": "dotenv -e .env -- flyway -configFiles=flyway.conf info",
+    "flyway:validate": "dotenv -e .env -- flyway -configFiles=flyway.conf validate",
+    "flyway:repair": "dotenv -e .env -- flyway -configFiles=flyway.conf repair",
+    "flyway:clean": "dotenv -e .env -- flyway -configFiles=flyway.conf clean",
+    "flyway:baseline": "dotenv -e .env -- flyway -configFiles=flyway.conf baseline"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -40,6 +46,7 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^22.10.7",
     "@types/supertest": "^6.0.2",
+    "dotenv-cli": "^11.0.0",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
