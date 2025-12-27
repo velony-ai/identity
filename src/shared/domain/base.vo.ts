@@ -1,4 +1,4 @@
-declare const VO_BRAND: unique symbol;
+export declare const VO_BRAND: unique symbol;
 
 export abstract class ValueObject<T> {
   private readonly [VO_BRAND]: ValueObject<T>;

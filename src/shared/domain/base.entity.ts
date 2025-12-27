@@ -1,4 +1,4 @@
-declare const ENTITY_BRAND: unique symbol;
+export declare const ENTITY_BRAND: unique symbol;
 
 export type AggregateId = string;
 

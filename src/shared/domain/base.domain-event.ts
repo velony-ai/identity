@@ -1,4 +1,4 @@
-declare const DOMAIN_EVENT_BRAND: unique symbol;
+export declare const DOMAIN_EVENT_BRAND: unique symbol;
 
 import { v4 as uuidv4 } from 'uuid';
 
