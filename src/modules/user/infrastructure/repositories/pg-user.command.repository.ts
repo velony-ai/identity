@@ -4,6 +4,9 @@ import { PgService } from 'src/shared/infrastructure/persistence/pg/pg.service';
 
 import { PgUserCommandMapper } from './pg-user.command.mapper';
 import { UserEntity } from '../../domain/entities/user.entity';
+import { EmailAlreadyExistsException } from '../../domain/exceptions/email-already-exists.exception';
+import { PhoneNumberAlreadyExistsException } from '../../domain/exceptions/phone-number-already-exists.exception';
+import { UsernameAlreadyExistsException } from '../../domain/exceptions/username-already-exists.exception';
 import { UserCommandRepository } from '../../domain/repositories/user.command.repository';
 import { Username } from '../../domain/value-objects/username.vo';
 
@@ -75,44 +78,64 @@ export class PgUserCommandRepository implements UserCommandRepository {
   public async save(entity: UserEntity): Promise<void> {
     const data = PgUserCommandMapper.toPersistence(entity);
 
-    await this.pgService.query(
-      `
-        INSERT INTO users (
-          uuid,
-          name,
-          username,
-          avatar_path,
-          password_hash,
-          email,
-          phone_number,
-          created_at,
-          updated_at,
-          deleted_at
-        ) VALUES (
-          $1, $2, $3, $4, $5, $6, $7, $8, $9, $10
-        )
-        ON CONFLICT (uuid) DO UPDATE SET
-          name = EXCLUDED.name,
-          username = EXCLUDED.username,
-          avatar_path = EXCLUDED.avatar_path,
-          password_hash = EXCLUDED.password_hash,
-          email = EXCLUDED.email,
-          phone_number = EXCLUDED.phone_number,
-          updated_at = EXCLUDED.updated_at,
-          deleted_at = EXCLUDED.deleted_at
-      `,
-      [
-        data.uuid,
-        data.name,
-        data.username,
-        data.avatar_path,
-        data.password_hash,
-        data.email,
-        data.phone_number,
-        data.created_at,
-        data.updated_at,
-        data.deleted_at,
-      ],
-    );
+    try {
+      await this.pgService.query(
+        `
+          INSERT INTO users (
+            uuid,
+            name,
+            username,
+            avatar_path,
+            password_hash,
+            email,
+            phone_number,
+            created_at,
+            updated_at,
+            deleted_at
+          ) VALUES (
+            $1, $2, $3, $4, $5, $6, $7, $8, $9, $10
+          )
+          ON CONFLICT (uuid) DO UPDATE SET
+            name = EXCLUDED.name,
+            username = EXCLUDED.username,
+            avatar_path = EXCLUDED.avatar_path,
+            password_hash = EXCLUDED.password_hash,
+            email = EXCLUDED.email,
+            phone_number = EXCLUDED.phone_number,
+            updated_at = EXCLUDED.updated_at,
+            deleted_at = EXCLUDED.deleted_at
+        `,
+        [
+          data.uuid,
+          data.name,
+          data.username,
+          data.avatar_path,
+          data.password_hash,
+          data.email,
+          data.phone_number,
+          data.created_at,
+          data.updated_at,
+          data.deleted_at,
+        ],
+      );
+    } catch (error) {
+      if (error.code === '23505') {
+        const constraintName = error.constraint;
+
+        if (constraintName?.includes('username')) {
+          throw new UsernameAlreadyExistsException();
+        }
+
+        if (constraintName?.includes('email')) {
+          throw new EmailAlreadyExistsException();
+        }
+
+        if (constraintName?.includes('phone')) {
+          throw new PhoneNumberAlreadyExistsException();
+        }
+      }
+
+      throw error;
+    }
   }
 }
