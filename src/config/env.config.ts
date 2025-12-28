@@ -23,7 +23,7 @@ export class IsTimeString implements ValidatorConstraintInterface {
 export class EnvironmentVariables {
   @IsOptional()
   @IsString()
-  NODE_ENV: string = 'development';
+  NODE_ENV: 'development' | 'production' = 'development';
 
   @IsOptional()
   @IsString()
