@@ -23,7 +23,7 @@ export class IsTimeString implements ValidatorConstraintInterface {
 export class EnvironmentVariables {
   @IsOptional()
   @IsString()
-  NODE_ENV: 'development' | 'production' = 'development';
+  SERVICE_ENV: 'development' | 'production' = 'development';
 
   @IsOptional()
   @IsString()
@@ -38,7 +38,7 @@ export class EnvironmentVariables {
 
   @IsOptional()
   @IsString()
-  FRONTEND_URL: string = 'http://localhost:3000';
+  FRONTEND_ORIGIN: string = 'http://localhost:3000';
 
   @IsString()
   DB_URL: string;

@@ -15,7 +15,7 @@ export class CookieService {
   constructor(private readonly configService: TypedConfigService) {}
 
   private getDefaultOptions(): CookieOptions {
-    const isProduction = this.configService.get('NODE_ENV') === 'production';
+    const isProduction = this.configService.get('SERVICE_ENV') === 'production';
 
     return {
       httpOnly: true,

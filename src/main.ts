@@ -11,8 +11,8 @@ async function bootstrap() {
   const configService = app.get(TypedConfigService);
 
   app.enableCors({
-    origin: configService.get('FRONTEND_URL'),
-    credentials: configService.get('NODE_ENV') === 'production',
+    origin: configService.get('FRONTEND_ORIGIN'),
+    credentials: configService.get('SERVICE_ENV') === 'production',
   });
 
   app.use(cookieParser());

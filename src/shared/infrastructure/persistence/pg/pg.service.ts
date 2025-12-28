@@ -19,7 +19,8 @@ export class PgService implements OnModuleInit, OnModuleDestroy {
   async onModuleInit() {
     this.pool = new Pool({
       connectionString: this.configService.get('DB_URL', { infer: true }),
-      ssl: this.configService.get('NODE_ENV', { infer: true }) === 'production',
+      ssl:
+        this.configService.get('SERVICE_ENV', { infer: true }) === 'production',
       max: this.configService.get('DB_MAX_CONNECTIONS', { infer: true }),
       idleTimeoutMillis: this.configService.get('DB_IDLE_TIMEOUT', {
         infer: true,
