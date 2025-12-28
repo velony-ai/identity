@@ -30,7 +30,10 @@ export class UpdateUserPasswordHandler implements ICommandHandler<UpdateUserPass
 
     const domainEvents = user.getDomainEvents();
     for (const event of domainEvents) {
-      await this.eventEmitter.emitAsync(event.constructor.name, event);
+      await this.eventEmitter.emitAsync(event.type, event, {
+        userId: command.context.userId,
+        correlationId: command.id,
+      });
     }
     user.clearDomainEvents();
   }

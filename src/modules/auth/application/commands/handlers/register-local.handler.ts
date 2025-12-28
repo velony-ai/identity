@@ -29,7 +29,9 @@ export class RegisterLocalHandler implements ICommandHandler<RegisterLocalComman
 
     const domainEvents = user.getDomainEvents();
     for (const event of domainEvents) {
-      await this.eventEmitter.emitAsync(event.constructor.name, event);
+      await this.eventEmitter.emitAsync(event.type, event, {
+        correlationId: command.id,
+      });
     }
     user.clearDomainEvents();
 

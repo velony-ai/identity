@@ -8,6 +8,6 @@ type Props = {
 
 export class RegisterLocalCommand extends Command<Props> {
   constructor(props: Props) {
-    super(props, undefined);
+    super(props);
   }
 }

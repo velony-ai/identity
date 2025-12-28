@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
+import { KafkaModule } from 'src/shared/infrastructure/events/kafka.module';
 import { PgModule } from 'src/shared/infrastructure/persistence/pg/pg.module';
 
 import { RemoveUserPasswordHandler } from './application/commands/handlers/remove-user-password.handler';
@@ -8,11 +9,13 @@ import { UpdateUserNameHandler } from './application/commands/handlers/update-us
 import { UpdateUserPasswordHandler } from './application/commands/handlers/update-user-password.handler';
 import { UpdateUserUsernameHandler } from './application/commands/handlers/update-user-username.handler';
 import { UserCommandRepository } from './domain/repositories/user.command.repository';
+import { UserCreatedEventHandler } from './infrastructure/events/user-created.event-handler';
+import { UserNameUpdatedEventHandler } from './infrastructure/events/user-name-updated.event-handler';
 import { UserController } from './infrastructure/http/user.controller';
 import { PgUserCommandRepository } from './infrastructure/repositories/pg-user.command.repository';
 
 @Module({
-  imports: [CqrsModule, PgModule],
+  imports: [CqrsModule, PgModule, KafkaModule],
   controllers: [UserController],
   providers: [
     RemoveUserPasswordHandler,
@@ -20,6 +23,9 @@ import { PgUserCommandRepository } from './infrastructure/repositories/pg-user.c
     UpdateUserAvatarPathHandler,
     UpdateUserNameHandler,
     UpdateUserUsernameHandler,
+
+    UserCreatedEventHandler,
+    UserNameUpdatedEventHandler,
 
     {
       provide: UserCommandRepository,

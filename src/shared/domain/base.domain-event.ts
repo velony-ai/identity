@@ -1,6 +1,6 @@
 export declare const DOMAIN_EVENT_BRAND: unique symbol;
 
-import { v4 as uuidv4 } from 'uuid';
+import { v7 as uuidv7 } from 'uuid';
 
 import { type AggregateId } from './base.entity';
 
@@ -10,14 +10,20 @@ export abstract class DomainEvent {
   private readonly [DOMAIN_EVENT_BRAND]: DomainEvent;
 
   public constructor(aggregateId: AggregateId) {
+    this.id = uuidv7();
     this.aggregateId = aggregateId;
-    this.eventId = uuidv4();
     this.occurredAt = new Date();
   }
 
-  public readonly aggregateId: AggregateId;
+  public get type(): string {
+    return (this.constructor as typeof DomainEvent).TYPE;
+  }
 
-  public readonly eventId: DomainEventId;
+  public static readonly TYPE: string;
+
+  public readonly id: DomainEventId;
+
+  public readonly aggregateId: AggregateId;
 
   public readonly occurredAt: Date;
 }

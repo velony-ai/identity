@@ -141,9 +141,9 @@ export class UserEntity extends Entity {
       new UserCreatedDomainEvent(newUser.id, {
         name: newUser.name.value,
         username: newUser.username.value,
-        avatarPath: newUser.avatarPath?.value ?? null,
-        email: newUser.email?.value ?? null,
-        phoneNumber: newUser.phoneNumber?.value ?? null,
+        avatarPath: newUser.avatarPath?.value,
+        email: newUser.email?.value,
+        phoneNumber: newUser.phoneNumber?.value,
       }),
     );
 

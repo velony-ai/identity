@@ -21,23 +21,27 @@ export class IsTimeString implements ValidatorConstraintInterface {
 }
 
 export class EnvironmentVariables {
-  @IsString()
-  DB_URL: string;
-
   @IsOptional()
   @IsString()
   NODE_ENV: string = 'development';
+
+  @IsOptional()
+  @IsString()
+  SERVICE_NAME: string = 'identity-service';
 
   @IsOptional()
   @Transform(({ value }) => parseInt(value, 10))
   @IsInt()
   @Min(1)
   @Max(65535)
-  PORT: number = 5001;
+  SERVICE_PORT: number = 5001;
 
   @IsOptional()
   @IsString()
-  FRONTEND_URL: string = '://localhost:3000';
+  FRONTEND_URL: string = 'http://localhost:3000';
+
+  @IsString()
+  DB_URL: string;
 
   @IsOptional()
   @Transform(({ value }) => parseInt(value, 10))
@@ -113,4 +117,17 @@ export class EnvironmentVariables {
   @IsString()
   @Validate(IsTimeString)
   EMAIL_TOKEN_EXPIRATION: string = '5m';
+
+  @Transform(({ value }) => value.split(',').map((v: string) => v.trim()))
+  @IsString({ each: true })
+  KAFKA_BROKERS: string[];
+
+  @IsString()
+  KAFKA_USERNAME: string;
+
+  @IsString()
+  KAFKA_PASSWORD: string;
+
+  @IsString()
+  KAFKA_CA_PATH: string;
 }
