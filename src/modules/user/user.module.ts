@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
-import { KafkaModule } from 'src/shared/infrastructure/events/kafka.module';
+import { KafkaModule } from 'src/shared/infrastructure/events/kafka/kafka.module';
 import { PassportModule } from 'src/shared/infrastructure/passport/passport.module';
 import { PgModule } from 'src/shared/infrastructure/persistence/pg/pg.module';
-import { S3Module } from 'src/shared/infrastructure/storage/s3.module';
+import { S3Module } from 'src/shared/infrastructure/storage/s3/s3.module';
 
 import { RemoveUserPasswordHandler } from './application/commands/handlers/remove-user-password.handler';
 import { UpdateUserAvatarPathHandler } from './application/commands/handlers/update-user-avatar-path.handler';

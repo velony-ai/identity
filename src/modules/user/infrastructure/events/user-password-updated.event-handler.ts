@@ -3,7 +3,7 @@ import { OnEvent } from '@nestjs/event-emitter';
 import { TypedConfigService } from 'src/config/typed-config.service';
 import { UserPasswordUpdatedDomainEvent } from 'src/modules/user/domain/events/user-password-updated.domain-event';
 import type { EventContext } from 'src/shared/application/event-context.interface';
-import { KafkaService } from 'src/shared/infrastructure/events/kafka.service';
+import { KafkaService } from 'src/shared/infrastructure/events/kafka/kafka.service';
 
 @Injectable()
 export class UserPasswordUpdatedEventHandler {

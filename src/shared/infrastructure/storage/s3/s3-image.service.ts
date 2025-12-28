@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import sharp from 'sharp';
 
 import { S3Service } from './s3.service';
-import { InvalidImageFormatException } from '../exceptions/invalid-image-format.exception';
-import { InvalidImageTypeException } from '../exceptions/invalid-image-type.exception';
+import { InvalidImageFormatException } from '../../exceptions/invalid-image-format.exception';
+import { InvalidImageTypeException } from '../../exceptions/invalid-image-type.exception';
 
 export interface ImageUploadOptions {
   maxWidth?: number;

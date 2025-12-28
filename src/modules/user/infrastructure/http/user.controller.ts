@@ -15,7 +15,7 @@ import { UpdateUserNameCommand } from 'src/modules/user/application/commands/upd
 import { UpdateUserPasswordCommand } from 'src/modules/user/application/commands/update-user-password.command';
 import { UpdateUserUsernameCommand } from 'src/modules/user/application/commands/update-user-username.command';
 import { JwtCookieAuthGuard } from 'src/shared/infrastructure/passport/guards/jwt-cookie-auth.guard';
-import { S3ImageService } from 'src/shared/infrastructure/storage/s3-image.service';
+import { S3ImageService } from 'src/shared/infrastructure/storage/s3/s3-image.service';
 
 import { User } from './decorators/user.decorator';
 import { RemoveUserPasswordDto } from './dtos/remove-user-password.dto';
