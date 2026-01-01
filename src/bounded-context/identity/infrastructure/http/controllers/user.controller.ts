@@ -15,8 +15,8 @@ import { JwtCookieAuthGuard } from '@common/guards/jwt-cookie-auth.guard';
 import { UpdateUserAvatarPathCommand } from '@identity-application/commands/update-user-avatar-path/update-user-avatar-path.command';
 import { UpdateUserNameCommand } from '@identity-application/commands/update-user-name/update-user-name.command';
 import { UpdateUserUsernameCommand } from '@identity-application/commands/update-user-username/update-user-username.command';
-import { type UpdateUserNameDto } from '@identity-infrastructure/http/dtos/update-user-name.dto';
-import { type UpdateUserUsernameDto } from '@identity-infrastructure/http/dtos/update-user-username.dto';
+import { UpdateUserNameDto } from '@identity-infrastructure/http/dtos/update-user-name.dto';
+import { UpdateUserUsernameDto } from '@identity-infrastructure/http/dtos/update-user-username.dto';
 import { S3ImageService } from '@identity-infrastructure/storage/s3/s3-image.service';
 
 @Controller('users')
