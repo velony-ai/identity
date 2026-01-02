@@ -32,13 +32,7 @@ export class PgService implements OnModuleInit, OnModuleDestroy {
     text: string,
     params?: unknown[],
   ): Promise<QueryResult<T>> {
-    const client = await this.pool.connect();
-    try {
-      const result = await client.query<T>(text, params);
-      return result;
-    } finally {
-      client.release();
-    }
+    return this.pool.query<T>(text, params);
   }
 
   async getClient(): Promise<PoolClient> {
