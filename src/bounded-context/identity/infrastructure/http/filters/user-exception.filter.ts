@@ -2,6 +2,7 @@ import { Catch, HttpStatus } from '@nestjs/common';
 import { type ArgumentsHost, type ExceptionFilter } from '@nestjs/common';
 import { type Response } from 'express';
 
+import { InvalidUsernameOrPasswordException } from '@identity-application/exceptions/invalid-username-or-password.exception';
 import { DuplicateEmailException } from '@identity-domain/user/exceptions/duplicate-email.exception';
 import { DuplicatePhoneNumberException } from '@identity-domain/user/exceptions/duplicate-phone-number.exception';
 import { DuplicateUsernameException } from '@identity-domain/user/exceptions/duplicate-username.exception';
@@ -14,6 +15,7 @@ import { UserNotFoundException } from '@identity-domain/user/exceptions/user-not
   DuplicateUsernameException,
   NoAuthenticationMethodException,
   UserNotFoundException,
+  InvalidUsernameOrPasswordException,
 )
 export class UserExceptionFilter implements ExceptionFilter {
   catch(exception: Error, host: ArgumentsHost) {
@@ -63,6 +65,13 @@ export class UserExceptionFilter implements ExceptionFilter {
 
     if (exception instanceof UserNotFoundException) {
       return { statusCode: HttpStatus.NOT_FOUND, errorCode: 'USER_NOT_FOUND' };
+    }
+
+    if (exception instanceof InvalidUsernameOrPasswordException) {
+      return {
+        statusCode: HttpStatus.UNAUTHORIZED,
+        errorCode: 'INVALID_USERNAME_OR_PASSWORD',
+      };
     }
 
     return {
