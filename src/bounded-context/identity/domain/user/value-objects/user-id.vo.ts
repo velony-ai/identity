@@ -1,5 +1,6 @@
-import { Id } from '@velony/domain';
 import { v7 as uuidv7 } from 'uuid';
+
+import { Id } from '@velony/domain';
 
 export class UserId extends Id<string> {
   public static create(value?: string): UserId {

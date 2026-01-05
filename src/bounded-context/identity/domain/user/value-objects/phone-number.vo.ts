@@ -1,6 +1,7 @@
-import { ValueObject } from '@velony/domain';
 import { parsePhoneNumberWithError } from 'libphonenumber-js';
 import { type CountryCode, type NationalNumber } from 'libphonenumber-js';
+
+import { ValueObject } from '@velony/domain';
 
 export class PhoneNumber extends ValueObject<string> {
   private readonly parsed: ReturnType<typeof parsePhoneNumberWithError>;

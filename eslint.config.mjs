@@ -49,6 +49,11 @@ export default [
           },
           pathGroups: [
             {
+              pattern: '@velony/**',
+              group: 'internal',
+              position: 'before',
+            },
+            {
               pattern: '@config/**',
               group: 'internal',
               position: 'before',
@@ -57,11 +62,6 @@ export default [
               pattern: '@common/**',
               group: 'internal',
               position: 'before',
-            },
-            {
-              pattern: '@shared-kernel/**',
-              group: 'internal',
-              position: 'after',
             },
             {
               pattern: '@identity-*/**',

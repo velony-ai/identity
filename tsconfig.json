@@ -26,8 +26,6 @@
 
       "@common/*": ["src/common/*"],
 
-      "@shared-kernel/*": ["src/shared-kernel/*"],
-
       "@identity-domain/*": ["src/bounded-context/identity/domain/*"],
       "@identity-application/*": ["src/bounded-context/identity/application/*"],
       "@identity-infrastructure/*": [

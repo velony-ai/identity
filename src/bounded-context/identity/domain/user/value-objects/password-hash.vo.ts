@@ -1,5 +1,6 @@
-import { ValueObject } from '@velony/domain';
 import bcrypt from 'bcrypt';
+
+import { ValueObject } from '@velony/domain';
 
 import { type Password } from '@identity-domain/user/value-objects/password.vo';
 
